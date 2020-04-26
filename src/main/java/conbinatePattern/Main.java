@@ -39,15 +39,23 @@ public class Main {
 //                .and(CustomerRegistrationValidator.isPhonelValid()
 //                .and(CustomerRegistrationValidator.isAdult()));
 
-        System.out.println(isEmailValid()
+        ValidationResult res = isEmailValid()
                 .and(isPhonelValid()
                 .and(isAdult()))
-                .apply(customer));
+                .apply(customer);
+        System.out.println(res);
+        if (res != ValidationResult.SUCCESS) {
+            throw new IllegalStateException(res.name());
+        }
 
-        System.out.println(isEmailValid()
+        ValidationResult res2 = isEmailValid()
                 .and(isPhonelValid()
                 .and(isAdult()))
-                .apply(customer2));
+                .apply(customer2);
+        System.out.println(res2);
+        if (res2 != ValidationResult.SUCCESS) {
+            throw new IllegalStateException(res2.name());
+        }
 
         System.out.println(isEmailValid()
                 .and(isPhonelValid()
